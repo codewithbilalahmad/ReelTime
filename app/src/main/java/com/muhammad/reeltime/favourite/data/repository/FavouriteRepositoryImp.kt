@@ -12,6 +12,7 @@ import com.muhammad.reeltime.home.data.local.MediaDao
 import com.muhammad.reeltime.home.domain.model.Media
 import com.muhammad.reeltime.utils.Result
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 
 class FavouriteRepositoryImp(
@@ -20,7 +21,10 @@ class FavouriteRepositoryImp(
     private val mediaDao : MediaDao
 ) : FavouriteRepository{
     private val _favouriteUpdateEvents = Channel<Boolean>()
-    val favouriteUpdateEvents = _favouriteUpdateEvents.receiveAsFlow()
+    override suspend fun favouriteDbUpdateEventFlow(): Flow<Boolean> {
+       return _favouriteUpdateEvents.receiveAsFlow()
+    }
+
     override suspend fun upsetFavoritesMediaItem(media: Media) {
         favouriteMediaDao.upsertFavoriteMediaItem(media.toFavoriteMediaEntity())
         syncFavoritesMedia()

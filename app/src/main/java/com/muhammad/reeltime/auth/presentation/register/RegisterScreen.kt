@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muhammad.reeltime.R
 import com.muhammad.reeltime.auth.domain.usecase.UserDataValidator
+import com.muhammad.reeltime.ui.components.GradientBackground
 import com.muhammad.reeltime.ui.components.ReelTimeActionButton
 import com.muhammad.reeltime.ui.components.ReelTimePasswordTextField
 import com.muhammad.reeltime.ui.components.ReelTimeTextField
@@ -84,111 +85,113 @@ private fun RegisterScreenContent(
     onAction: (RegisterAction) -> Unit,
 ) {
     val autoFillManager = LocalAutofillManager.current
-    Column(
-        modifier = modifier
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 32.dp)
-            .padding(top = 16.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.create_account),
-            style = MaterialTheme.typography.headlineMedium
-        )
-        val annotatedString = buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    fontFamily = Poppins, color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            ) {
-                append(stringResource(R.string.already_have_an_account) + " ")
-                pushStringAnnotation(
-                    tag = "clickable_text",
-                    annotation = stringResource(R.string.login)
-                )
+    GradientBackground {
+        Column(
+            modifier = modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 32.dp)
+                .padding(top = 16.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.create_account),
+                style = MaterialTheme.typography.headlineMedium
+            )
+            val annotatedString = buildAnnotatedString {
                 withStyle(
                     style = SpanStyle(
-                        fontFamily = Poppins,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.SemiBold
+                        fontFamily = Poppins, color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 ) {
-                    append(stringResource(R.string.login))
+                    append(stringResource(R.string.already_have_an_account) + " ")
+                    pushStringAnnotation(
+                        tag = "clickable_text",
+                        annotation = stringResource(R.string.login)
+                    )
+                    withStyle(
+                        style = SpanStyle(
+                            fontFamily = Poppins,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    ) {
+                        append(stringResource(R.string.login))
+                    }
                 }
             }
-        }
-        ClickableText(text = annotatedString) { offset ->
-            annotatedString.getStringAnnotations(
-                tag = "clickable_text", start = offset, end = offset
-            ).firstOrNull()?.let {
-                onAction(RegisterAction.OnLoginClick)
+            ClickableText(text = annotatedString) { offset ->
+                annotatedString.getStringAnnotations(
+                    tag = "clickable_text", start = offset, end = offset
+                ).firstOrNull()?.let {
+                    onAction(RegisterAction.OnLoginClick)
+                }
             }
-        }
-        Spacer(Modifier.height(48.dp))
-        ReelTimeTextField(
-            state = state.username,
-            startIcon = ImageVector.vectorResource(R.drawable.user) ,
-            endIcon = null,
-            keyboardType = KeyboardType.Email,
-            hint = stringResource(R.string.example_username),
-            title = stringResource(R.string.username),
-            modifier = Modifier.fillMaxWidth(), type = ContentType.Username
-        )
-        Spacer(Modifier.height(16.dp))
-        ReelTimeTextField(
-            state = state.email,
-            startIcon = ImageVector.vectorResource(R.drawable.email) ,
-            endIcon = null,
-            keyboardType = KeyboardType.Email,
-            hint = stringResource(R.string.example_email),
-            title = stringResource(R.string.email),
-            modifier = Modifier.fillMaxWidth(), type = ContentType.EmailAddress
-        )
-        Spacer(Modifier.height(16.dp))
-        ReelTimePasswordTextField(
-            state = state.password, type = ContentType.NewPassword,
-            isPasswordVisible = state.isPasswordVisible,
-            onTogglePasswordVisibility = {
-                onAction(RegisterAction.OnTogglePasswordVisibility)
-            },
-            hint = stringResource(R.string.password),
-            title = stringResource(R.string.password),
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(Modifier.height(16.dp))
-        PasswordRequirement(
-            text = stringResource(
-                id = R.string.at_least_x_characters,
-                UserDataValidator.MIN_PASSWORD_LENGTH
-            ), isValid = state.passwordValidationState.hasMinLength
-        )
-        Spacer(Modifier.height(4.dp))
-        PasswordRequirement(
-            text = stringResource(
-                id = R.string.at_least_one_number
-            ), isValid = state.passwordValidationState.hasNumber
-        )
-        Spacer(Modifier.height(4.dp))
-        PasswordRequirement(
-            text = stringResource(
-                id = R.string.contains_lowercase_char
-            ), isValid = state.passwordValidationState.hasLowerCaseCharacter
-        )
-        Spacer(Modifier.height(4.dp))
-        PasswordRequirement(
-            text = stringResource(
-                id = R.string.contains_uppercase_char
-            ), isValid = state.passwordValidationState.hasUpperCaseCharacter
-        )
-        Spacer(Modifier.height(32.dp))
-        ReelTimeActionButton(
-            text = stringResource(R.string.register),
-            isLoading = state.isRegistering,
-            enabled = state.canRegister,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            autoFillManager?.commit()
-            onAction(RegisterAction.OnRegisterClick)
+            Spacer(Modifier.height(48.dp))
+            ReelTimeTextField(
+                state = state.username,
+                startIcon = ImageVector.vectorResource(R.drawable.user) ,
+                endIcon = null,
+                keyboardType = KeyboardType.Email,
+                hint = stringResource(R.string.example_username),
+                title = stringResource(R.string.username),
+                modifier = Modifier.fillMaxWidth(), type = ContentType.Username
+            )
+            Spacer(Modifier.height(16.dp))
+            ReelTimeTextField(
+                state = state.email,
+                startIcon = ImageVector.vectorResource(R.drawable.email) ,
+                endIcon = null,
+                keyboardType = KeyboardType.Email,
+                hint = stringResource(R.string.example_email),
+                title = stringResource(R.string.email),
+                modifier = Modifier.fillMaxWidth(), type = ContentType.EmailAddress
+            )
+            Spacer(Modifier.height(16.dp))
+            ReelTimePasswordTextField(
+                state = state.password, type = ContentType.NewPassword,
+                isPasswordVisible = state.isPasswordVisible,
+                onTogglePasswordVisibility = {
+                    onAction(RegisterAction.OnTogglePasswordVisibility)
+                },
+                hint = stringResource(R.string.password),
+                title = stringResource(R.string.password),
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(16.dp))
+            PasswordRequirement(
+                text = stringResource(
+                    id = R.string.at_least_x_characters,
+                    UserDataValidator.MIN_PASSWORD_LENGTH
+                ), isValid = state.passwordValidationState.hasMinLength
+            )
+            Spacer(Modifier.height(4.dp))
+            PasswordRequirement(
+                text = stringResource(
+                    id = R.string.at_least_one_number
+                ), isValid = state.passwordValidationState.hasNumber
+            )
+            Spacer(Modifier.height(4.dp))
+            PasswordRequirement(
+                text = stringResource(
+                    id = R.string.contains_lowercase_char
+                ), isValid = state.passwordValidationState.hasLowerCaseCharacter
+            )
+            Spacer(Modifier.height(4.dp))
+            PasswordRequirement(
+                text = stringResource(
+                    id = R.string.contains_uppercase_char
+                ), isValid = state.passwordValidationState.hasUpperCaseCharacter
+            )
+            Spacer(Modifier.height(32.dp))
+            ReelTimeActionButton(
+                text = stringResource(R.string.register),
+                isLoading = state.isRegistering,
+                enabled = state.canRegister,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                autoFillManager?.commit()
+                onAction(RegisterAction.OnRegisterClick)
+            }
         }
     }
 }

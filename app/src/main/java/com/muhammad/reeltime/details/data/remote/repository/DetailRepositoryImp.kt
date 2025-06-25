@@ -4,6 +4,7 @@ import com.muhammad.reeltime.details.data.remote.dto.DetailsDto
 import com.muhammad.reeltime.details.domain.repository.DetailRepository
 import com.muhammad.reeltime.home.domain.model.Media
 import com.muhammad.reeltime.home.domain.repository.HomeRepository
+import com.muhammad.reeltime.utils.APIConstants.API_KEY
 import com.muhammad.reeltime.utils.APIConstants.BASE_URL
 import com.muhammad.reeltime.utils.DataError
 import com.muhammad.reeltime.utils.Result
@@ -29,7 +30,9 @@ class DetailRepositoryImp(
                 return@flow
             }
             val type = media.mediaType
-            val response =  httpClient.get<DetailsDto>(route = "$BASE_URL/$type/$id", queryParameters = mapOf())
+            val response =  httpClient.get<DetailsDto>(route = "$BASE_URL$type/$id", queryParameters = mapOf(
+                "api_key" to API_KEY
+            ))
             when(response){
                 is Result.Failure ->{
                     emit(Result.Failure(response.error))

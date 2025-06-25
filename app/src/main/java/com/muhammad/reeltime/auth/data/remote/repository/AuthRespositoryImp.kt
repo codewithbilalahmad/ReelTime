@@ -6,6 +6,9 @@ import com.muhammad.reeltime.auth.data.remote.dto.AuthRequest
 import com.muhammad.reeltime.auth.data.remote.dto.AuthResponse
 import com.muhammad.reeltime.auth.domain.repository.AuthRepository
 import com.muhammad.reeltime.utils.BackendConstants
+import com.muhammad.reeltime.utils.BackendConstants.BACKEND_BASE_URL
+import com.muhammad.reeltime.utils.BackendConstants.LOGIN
+import com.muhammad.reeltime.utils.BackendConstants.REGISTER
 import com.muhammad.reeltime.utils.DataError
 import com.muhammad.reeltime.utils.EmptyResult
 import com.muhammad.reeltime.utils.Result
@@ -22,8 +25,8 @@ class AuthRespositoryImp(
     override suspend fun register(
         request: AuthRequest,
     ): EmptyResult<DataError.Network> {
-        return httpClient.post<AuthRequest, Unit>(
-            route = "${BackendConstants.BACKEND_BASE_URL}${BackendConstants.REGISTER}",
+        return  httpClient.post<AuthRequest, Unit>(
+            route = "${BACKEND_BASE_URL}${REGISTER}",
             body = request
         )
     }
@@ -32,7 +35,7 @@ class AuthRespositoryImp(
         request: AuthRequest,
     ): EmptyResult<DataError.Network> {
         val result = httpClient.post<AuthRequest, AuthResponse>(
-            route = "${BackendConstants.BACKEND_BASE_URL}${BackendConstants.LOGIN}", body = request,
+            route = "${BACKEND_BASE_URL}${LOGIN}", body = request
         )
         if (result is Result.Success) {
             val data = result.data

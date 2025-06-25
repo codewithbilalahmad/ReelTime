@@ -3,6 +3,7 @@ package com.muhammad.reeltime.main
 import android.app.Application
 import com.muhammad.reeltime.auth.di.authModule
 import com.muhammad.reeltime.categories.di.categoryModule
+import com.muhammad.reeltime.details.di.detailModule
 import com.muhammad.reeltime.favourite.di.favouriteModule
 import com.muhammad.reeltime.home.di.homeModule
 import com.muhammad.reeltime.main.di.mainModule
@@ -25,7 +26,7 @@ class ReelTimeApplication : Application() {
             androidLogger()
             modules(
                 mainModule, homeModule, authModule,
-                categoryModule, favouriteModule, searchModule, profileModule
+                categoryModule, favouriteModule,detailModule, searchModule, profileModule
             )
         }
     }

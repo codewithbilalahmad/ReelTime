@@ -6,7 +6,9 @@ import com.muhammad.reeltime.favourite.data.repository.BackendFavoritesRepositor
 import com.muhammad.reeltime.favourite.data.repository.FavouriteRepositoryImp
 import com.muhammad.reeltime.favourite.domain.BackendFavouriteRepository
 import com.muhammad.reeltime.favourite.domain.FavouriteRepository
+import com.muhammad.reeltime.favourite.presentation.FavouriteViewModel
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -19,4 +21,5 @@ val favouriteModule = module {
     }
     singleOf(::BackendFavoritesRepositoryImpl).bind<BackendFavouriteRepository>()
     singleOf(::FavouriteRepositoryImp).bind<FavouriteRepository>()
+    viewModelOf(::FavouriteViewModel)
 }

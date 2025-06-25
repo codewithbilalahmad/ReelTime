@@ -1,10 +1,10 @@
 package com.muhammad.reeltime.favourite.domain
 
 import com.muhammad.reeltime.home.domain.model.Media
+import kotlinx.coroutines.flow.Flow
 
 interface FavouriteRepository {
-
-
+    suspend fun favouriteDbUpdateEventFlow() : Flow<Boolean>
     suspend fun upsetFavoritesMediaItem(
         media: Media
     )

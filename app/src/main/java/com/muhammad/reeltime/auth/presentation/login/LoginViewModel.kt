@@ -54,8 +54,8 @@ class LoginViewModel(
             _state.update { it.copy(isLoggingIn = true) }
             val result = authRepository.login(
                 AuthRequest(
-                    email = state.value.email.toString().trim(),
-                    password = state.value.password.toString().trim()
+                    email = state.value.email.text.toString().trim(),
+                    password = state.value.password.text.toString().trim()
                 )
             )
             _state.update { it.copy(isLoggingIn = false) }

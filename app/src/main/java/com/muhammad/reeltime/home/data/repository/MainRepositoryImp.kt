@@ -53,16 +53,15 @@ class MainRepositoryImp(
     ): Flow<Result<List<Media>, DataError.Network>> {
         return flow {
             val localMediaList = mediaDao.getMediaListByCategory(TRENDING)
-            val loadJustFromCache =
-                localMediaList.isNotEmpty() && !forceFetchFromRemote && !isRefresh
+            val loadJustFromCache = localMediaList.isNotEmpty() && !forceFetchFromRemote && !isRefresh
             if (loadJustFromCache) {
                 emit(Result.Success(localMediaList.map { it.toMedia() }))
                 return@flow
             }
             val response = httpClient.get<MediaListDto>(
-                route = "${BASE_URL}treading/$type/$time", queryParameters = mapOf(
+                route = "${BASE_URL}$TRENDING/$type/$time", queryParameters = mapOf(
                     "api_key" to API_KEY,
-                    "page" to 1
+                    "page" to page
                 )
             )
             when(response){
@@ -114,7 +113,7 @@ class MainRepositoryImp(
             val response = httpClient.get<MediaListDto>(
                 route = "${BASE_URL}$type/$POPULAR", queryParameters = mapOf(
                     "api_key" to API_KEY,
-                    "page" to 1
+                    "page" to page
                 )
             )
             when(response){

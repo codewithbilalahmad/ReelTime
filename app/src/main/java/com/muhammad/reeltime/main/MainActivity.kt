@@ -11,7 +11,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.muhammad.reeltime.main.navigation.AppNavigation
-import com.muhammad.reeltime.ui.components.GradientBackground
 import com.muhammad.reeltime.ui.theme.ReelTimeTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,12 +30,10 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             ReelTimeTheme {
-                GradientBackground{
-                    val navHostController = rememberNavController()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
-                    val isLoggedIn = state.isLoggedIn
-                    AppNavigation(navHostController = navHostController, isLoggedIn = isLoggedIn)
-                }
+                val navHostController = rememberNavController()
+                val state by viewModel.state.collectAsStateWithLifecycle()
+                val isLoggedIn = state.isLoggedIn
+                AppNavigation(navHostController = navHostController, isLoggedIn = isLoggedIn)
             }
         }
     }

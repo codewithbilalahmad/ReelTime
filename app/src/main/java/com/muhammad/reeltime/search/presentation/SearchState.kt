@@ -4,6 +4,7 @@ import com.muhammad.reeltime.home.domain.model.Media
 
 data class SearchState(
     val isLoading : Boolean = false,
+    val isMoreSearchLoading : Boolean = false,
     val searchPage : Int = 1,
     val searchQuery : String = "",
     val searchList : List<Media> = emptyList()

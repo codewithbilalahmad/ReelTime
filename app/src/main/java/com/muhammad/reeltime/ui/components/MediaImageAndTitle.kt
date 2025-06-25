@@ -16,7 +16,11 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,11 +41,11 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
+import com.muhammad.reeltime.R
 import com.muhammad.reeltime.home.domain.model.Media
+import com.muhammad.reeltime.home.domain.usecase.GenreIdsToString
 import com.muhammad.reeltime.main.navigation.Destinations
 import com.muhammad.reeltime.utils.APIConstants.IMAGE_BASE_URL
-import com.muhammad.reeltime.R
-import com.muhammad.reeltime.home.domain.usecase.GenreIdsToString
 
 @Composable
 fun MediaImageAndTitle(
@@ -70,7 +74,7 @@ fun MediaImageAndTitle(
                 )
             )
             .clickable {
-                navHostController.navigate(Destinations.CoreDetailsScreen(media.mediaId))
+                navHostController.navigate(Destinations.DetailsScreen(media.mediaId))
             }) {
         Box(
             modifier = Modifier

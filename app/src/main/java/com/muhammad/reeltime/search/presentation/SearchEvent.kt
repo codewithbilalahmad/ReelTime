@@ -1,6 +1,7 @@
 package com.muhammad.reeltime.search.presentation
 
-import android.provider.MediaStore.Audio.Media
+import com.muhammad.reeltime.home.domain.model.Media
+
 
 sealed interface SearchEvent{
     data class OnSearchQueryChange(
