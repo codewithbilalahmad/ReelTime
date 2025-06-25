@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.muhammad.reeltime.R
+import com.muhammad.reeltime.ui.components.GradientBackground
 import com.muhammad.reeltime.ui.theme.Poppins
 import com.muhammad.reeltime.ui.components.ReelTimeActionButton
 import com.muhammad.reeltime.ui.components.ReelTimePasswordTextField
@@ -69,6 +70,7 @@ fun LoginScreen(
 
 @Composable
 private fun LoginScreenContent(state: LoginState, onAction: (LoginAction) -> Unit) {
+    GradientBackground {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -153,4 +155,5 @@ private fun LoginScreenContent(state: LoginState, onAction: (LoginAction) -> Uni
                 })
             }
         }
+    }
 }

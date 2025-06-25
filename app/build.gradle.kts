@@ -57,7 +57,6 @@ dependencies {
     implementation(libs.chromecast.sender)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.paging)
     implementation(libs.serialization)
     implementation(libs.koin.androidx.compose)
     implementation(libs.navigation)

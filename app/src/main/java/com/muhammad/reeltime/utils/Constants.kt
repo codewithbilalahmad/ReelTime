@@ -34,7 +34,7 @@ object APIConstants {
     const val ALL = "all"
     const val MOVIE = "movie"
     const val TV = "tv"
-    const val API_KEY = ""
+    const val API_KEY = "96280d18f050e08b1b42aef1f2359ca9"
     const val BASE_URL = "https://api.themoviedb.org/3/"
     const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
     val genres = listOf(

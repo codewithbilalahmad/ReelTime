@@ -3,7 +3,6 @@ package com.muhammad.reeltime.details.data.remote.repository
 import com.muhammad.reeltime.details.data.remote.dto.VideosDto
 import com.muhammad.reeltime.details.domain.repository.VideoRepository
 import com.muhammad.reeltime.home.domain.repository.HomeRepository
-import com.muhammad.reeltime.main.ReelTimeApplication
 import com.muhammad.reeltime.utils.APIConstants.API_KEY
 import com.muhammad.reeltime.utils.APIConstants.BASE_URL
 import com.muhammad.reeltime.utils.DataError
@@ -17,7 +16,6 @@ class VideoRepositoryImp(
     private val httpClient : HttpClient,
     private val mainRepository: HomeRepository
 ) : VideoRepository{
-    private val context = ReelTimeApplication.INSTANCE
     override suspend fun getVideos(
         id: Int,
         isRefreshing: Boolean,
@@ -30,7 +28,7 @@ class VideoRepositoryImp(
                 return@flow
             }
             val type= media.mediaType
-            val response = httpClient.get<VideosDto>(route = "$BASE_URL/$type/$id/videos", queryParameters = mapOf(
+            val response = httpClient.get<VideosDto>(route = "$BASE_URL$type/$id/videos", queryParameters = mapOf(
                 "api_key" to API_KEY
             ))
             when(response){
@@ -40,7 +38,7 @@ class VideoRepositoryImp(
                 }
                 is Result.Success -> {
                     val videoIds = response.data.results.map { it.key }
-                    if(videoIds.isNotEmpty() == true){
+                    if(videoIds.isNotEmpty()){
                         mainRepository.upsertMediaItem(
                             media.copy(videosIds = videoIds)
                         )

@@ -31,12 +31,10 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             ReelTimeTheme {
-                GradientBackground{
-                    val navHostController = rememberNavController()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
-                    val isLoggedIn = state.isLoggedIn
-                    AppNavigation(navHostController = navHostController, isLoggedIn = isLoggedIn)
-                }
+                val navHostController = rememberNavController()
+                val state by viewModel.state.collectAsStateWithLifecycle()
+                val isLoggedIn = state.isLoggedIn
+                AppNavigation(navHostController = navHostController, isLoggedIn = isLoggedIn)
             }
         }
     }

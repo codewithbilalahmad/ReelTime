@@ -70,7 +70,7 @@ fun MediaImageAndTitle(
                 )
             )
             .clickable {
-                navHostController.navigate(Destinations.CoreDetailsScreen(media.mediaId))
+                navHostController.navigate(Destinations.DetailsScreen(media.mediaId))
             }) {
         Box(
             modifier = Modifier

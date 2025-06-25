@@ -16,7 +16,7 @@ class MainViewModel(
     init {
         viewModelScope.launch {
             _state.update { it.copy(isCheckingAuth = true) }
-            _state.update { it.copy(isLoggedIn = preferences.getBoolean("isLoggedIn", false) ?: false) }
+            _state.update { it.copy(isLoggedIn = preferences.getString("token",null) != null) }
             _state.update { it.copy(isCheckingAuth = false) }
         }
     }

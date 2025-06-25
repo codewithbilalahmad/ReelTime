@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.muhammad.reeltime.R
+import com.muhammad.reeltime.ui.components.GradientBackground
 import com.muhammad.reeltime.ui.components.ReelTimeActionButton
 import com.muhammad.reeltime.ui.components.ReelTimeOutlinedActionButton
 
@@ -35,46 +36,48 @@ fun IntroScreen(onSignUpClick: () -> Unit, onSignInClick: () -> Unit) {
 
 @Composable
 fun IntroScreenContent(onAction: (IntroAction) -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()){
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f), contentAlignment = Alignment.Center
-        ) {
-            RunwellLogoVertical()
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .padding(bottom = 48.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.welcome_to_runwell),
-                color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 20.sp
-            )
-            Spacer(Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.runwell_description),
-                style = MaterialTheme.typography.bodySmall
-            )
-            Spacer(Modifier.height(32.dp))
-            ReelTimeOutlinedActionButton(
-                text = stringResource(R.string.sign_in),
-                isLoading = false,
-                onClick = {
-                    onAction(IntroAction.OnSignInClick)
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(Modifier.height(32.dp))
-            ReelTimeActionButton(
-                isLoading = false,
-                text = stringResource(R.string.sign_up),
-                modifier = Modifier.fillMaxWidth()
+    GradientBackground {
+        Column(modifier = Modifier.fillMaxSize()){
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f), contentAlignment = Alignment.Center
             ) {
-                onAction(IntroAction.OnSignUpClick)
+                RunwellLogoVertical()
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .padding(bottom = 48.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.welcome_to_runwell),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontSize = 20.sp
+                )
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    text = stringResource(R.string.runwell_description),
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(Modifier.height(32.dp))
+                ReelTimeOutlinedActionButton(
+                    text = stringResource(R.string.sign_in),
+                    isLoading = false,
+                    onClick = {
+                        onAction(IntroAction.OnSignInClick)
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(Modifier.height(32.dp))
+                ReelTimeActionButton(
+                    isLoading = false,
+                    text = stringResource(R.string.sign_up),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    onAction(IntroAction.OnSignUpClick)
+                }
             }
         }
     }

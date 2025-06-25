@@ -22,7 +22,7 @@ import com.muhammad.reeltime.main.navigation.Destinations
 @Composable
 fun AutoSwipeSection(
     title: String,
-    showSeeAll: Boolean = false,destination : Destinations,
+    showSeeAll: Boolean = false,destination : Destinations?=null,
     navHostController: NavHostController,
     mediaList: List<Media>,
 ) {
@@ -40,7 +40,9 @@ fun AutoSwipeSection(
             )
             if (showSeeAll) {
                 TextButton(onClick = {
-                    navHostController.navigate(destination)
+                    destination?.let { route ->
+                        navHostController.navigate(destination)
+                    }
                 }) {
                     Text(
                         text = stringResource(R.string.see_all),

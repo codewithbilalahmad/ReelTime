@@ -17,14 +17,12 @@ room = "2.7.2"
 kotlinx-serialization = "1.8.1"
 roomCompiler = "2.7.2"
 roomKtx = "2.7.2"
-roomPaging = "2.7.2"
 
 [libraries]
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
-androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomPaging" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }

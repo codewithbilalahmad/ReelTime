@@ -4,15 +4,13 @@ import kotlinx.serialization.Serializable
 
 sealed interface Destinations {
     @Serializable
-    data object CoreScreen : Destinations
-    @Serializable
     data object LoginScreen : Destinations
     @Serializable
     data object IntroScreen : Destinations
     @Serializable
     data object RegisterScreen : Destinations
     @Serializable
-    data object MainScreen : Destinations
+    data object HomeScreen : Destinations
     @Serializable
     data object TrendingScreen : Destinations
     @Serializable
@@ -22,9 +20,7 @@ sealed interface Destinations {
     @Serializable
     data object ProfileScreen : Destinations
     @Serializable
-    data class CoreDetailsScreen(val mediaId : Int) : Destinations
-    @Serializable
-    data object DetailsScreen : Destinations
+    data class DetailsScreen(val mediaId : Int) : Destinations
     @Serializable
     data object WatchVideoScreen : Destinations
     @Serializable
@@ -32,17 +28,13 @@ sealed interface Destinations {
     @Serializable
     data object SearchScreen : Destinations
     @Serializable
-    data object CoreFavoritesScreen : Destinations
-    @Serializable
     data object FavoritesScreen : Destinations
     @Serializable
     data object LikedListScreen : Destinations
     @Serializable
     data object BookmarkedScreen : Destinations
     @Serializable
-    data object CoreCategoriesScreen : Destinations
-    @Serializable
     data object CategoriesScreen : Destinations
     @Serializable
-    data object CategoriesListScreen : Destinations
+    data class CategoriesListScreen(val category : String) : Destinations
 }

@@ -52,7 +52,7 @@ fun MediaImage(
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.inverseOnSurface)
             .clickable {
-                navHostController.navigate(Destinations.CoreDetailsScreen(media.mediaId))
+                navHostController.navigate(Destinations.DetailsScreen(media.mediaId))
             }) {
         when (imageState) {
             is AsyncImagePainter.State.Loading -> {

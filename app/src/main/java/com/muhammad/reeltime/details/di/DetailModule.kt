@@ -6,7 +6,9 @@ import com.muhammad.reeltime.details.data.remote.repository.VideoRepositoryImp
 import com.muhammad.reeltime.details.domain.repository.DetailRepository
 import com.muhammad.reeltime.details.domain.repository.SimilarRepository
 import com.muhammad.reeltime.details.domain.repository.VideoRepository
+import com.muhammad.reeltime.details.presentation.detail.DetailViewModel
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -14,4 +16,5 @@ val detailModule = module {
     singleOf(::DetailRepositoryImp).bind<DetailRepository>()
     singleOf(::VideoRepositoryImp).bind<VideoRepository>()
     singleOf(::SimilarRepositoryImp).bind<SimilarRepository>()
+    viewModelOf(::DetailViewModel)
 }

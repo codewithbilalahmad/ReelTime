@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun GradientBackground(
     modifier: Modifier = Modifier,
-    hasToolbar: Boolean = true,
+    hasTopbar : Boolean = false,
     content :@Composable ColumnScope.() -> Unit,
 ) {
     val configuration = LocalConfiguration.current
@@ -65,10 +65,7 @@ fun GradientBackground(
         )
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .then(
-                    if (hasToolbar) Modifier else Modifier.statusBarsPadding()
-                )
+                .fillMaxSize().statusBarsPadding()
         ) {
             content()
         }
