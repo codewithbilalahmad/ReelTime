@@ -44,7 +44,6 @@ import com.muhammad.reeltime.ui.components.GradientBackground
 import com.muhammad.reeltime.utils.ObserveAsEvents
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 @Composable
 fun DetailScreen(
     navHostController: NavHostController, mediaId: Int,

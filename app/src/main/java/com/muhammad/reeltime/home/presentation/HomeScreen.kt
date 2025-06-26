@@ -42,9 +42,11 @@ import com.muhammad.reeltime.ui.components.GradientBackground
 import com.muhammad.reeltime.ui.components.NonFocusedTopBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
+
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel, navHostController: NavHostController) {
+fun HomeScreen(viewModel: HomeViewModel = koinViewModel(), navHostController: NavHostController) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     HomeScreenContent(
         navHostController = navHostController,

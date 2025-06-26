@@ -11,9 +11,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,7 +26,6 @@ import com.muhammad.reeltime.main.navigation.Destinations
 import com.muhammad.reeltime.search.presentation.components.SearchMediaItem
 import com.muhammad.reeltime.ui.components.FocusedTopBar
 import com.muhammad.reeltime.ui.components.GradientBackground
-import com.muhammad.reeltime.ui.components.MediaImageAndTitle
 import com.muhammad.reeltime.utils.ObserveAsEvents
 import org.koin.androidx.compose.koinViewModel
 
@@ -33,6 +34,7 @@ fun SearchScreen(
     navHostController: NavHostController, viewModel: SearchViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var isPaginating by remember { mutableStateOf(false) }
     ObserveAsEvents(viewModel.navigateToDetailChannel) { mediaId ->
         navHostController.navigate(Destinations.DetailsScreen(mediaId))
     }
@@ -55,9 +57,11 @@ fun SearchScreen(
                         SearchMediaItem(media = media, onClick = {
                             viewModel.onEvent(SearchEvent.OnSearchItemClick(media))
                         })
-                        if(index >= state.searchList.size -1){
-                            LaunchedEffect(index) {
+                        LaunchedEffect(index,isPaginating) {
+                            if(!isPaginating && index >= state.searchList.size -1 && !state.isMoreSearchLoading){
+                                isPaginating = true
                                 viewModel.onEvent(SearchEvent.OnPaginate)
+                                isPaginating = false
                             }
                         }
                     }
